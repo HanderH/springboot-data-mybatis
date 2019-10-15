@@ -1,0 +1,12 @@
+server:
+  port: 8888
+spring:
+  datasource:
+    username: product_cfg_app
+    password: productCfgApp#123
+    url: jdbc:oracle:thin:@csdbb1.yw.zj.chinamobile.com:1524:csdba31
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+  mvc:
+    date-format: yyyy-MM-dd
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*.xml

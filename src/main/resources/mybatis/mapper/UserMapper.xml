@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hsj.mapper.UserMapper">
+
+    <resultMap id="BaseResultMap" type="com.hsj.entity.Employee">
+        <result column="id"  property="id" />
+        <result column="gender" property="gender"/>
+        <result column="name"  property="name" />
+        <result column="email"  property="email" />
+        <result column="birth"  property="birth" />
+    </resultMap>
+
+    <select id="getEmployees" resultType="com.hsj.entity.Employee">
+        select id,name,gender,email,birth
+        from employee
+    </select>
+
+    <select id="getEmployeeById" resultMap="BaseResultMap" parameterType="int">
+        select id,name,gender,email,birth
+        from employee
+        where id = #{id}
+    </select>
+
+    <!--<insert id="addEmp" parameterType="com.hsj.entity.Employee" useGeneratedKeys="true" keyProperty="id">
+
+        insert into employee(name,gender,email,birth)
+                    values(#{name},#{gender},#{email},#{birth})
+    </insert>-->
+
+    <insert id="addEmp" parameterType="com.hsj.entity.Employee">
+
+        <selectKey keyProperty="id" resultType="int" order="BEFORE">
+            select emp_seq.nextval from dual
+        </selectKey>
+        insert into employee(id,name,gender,email,birth)
+                    values(#{id},#{name},#{gender},#{email},#{birth})
+    </insert>
+
+    <update id="updateEmp" parameterType="com.hsj.entity.Employee">
+
+        update employee set name=#{name},gender=#{gender},email=#{email},birth=#{birth}
+        where id=#{id}
+    </update>
+
+    <delete id="deleteEmpById" parameterType="int">
+        delete from employee
+        where id = #{id}
+    </delete>
+</mapper>
