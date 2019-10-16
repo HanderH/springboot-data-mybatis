@@ -14,6 +14,7 @@
 
 		<!-- Custom styles for this template -->
 		<link href="asserts/css/dashboard.css" rel="stylesheet">
+
 		<style type="text/css">
 			/* Chart.js */
 			
@@ -40,6 +41,8 @@
 				animation: chartjs-render-animation 0.001s;
 			}
 		</style>
+
+        <script type="text/javascript" src="asserts/js/jquery-3.2.1.slim.min.js" ></script>
 	</head>
 
 	<body>
@@ -66,7 +69,9 @@
 									<td th:text="${#dates.format(emp.birth,'yyyy-MM-dd')}">dolor</td>
 									<td>
 										<a class="btn btn-sm btn-primary" th:href="@{/toEdit}+'?id='+${emp.id}">编辑</a>
-										<a class="btn btn-sm btn-danger" th:href="@{/deleteEmp}+'?id='+${emp.id}">删除</a>
+										<button class="btn btn-sm btn-danger deleteBtn" onclick="delEmp()" th:value="${emp.id}">删除</button>
+                                        <!-- th:value="${emp.id}" th:href="@{/deleteEmp}+'?id='+${emp.id}"-->
+                                       <!-- <a class="btn btn-sm btn-danger deleteBtn" value="1">删除</a>-->
 									</td>
 								</tr>
 							</tbody>
@@ -83,6 +88,7 @@
 		<script type="text/javascript" src="asserts/js/popper.min.js"></script>
 		<script type="text/javascript" src="asserts/js/bootstrap.min.js"></script>
 
+
 		<!-- Icons -->
 		<script type="text/javascript" src="asserts/js/feather.min.js"></script>
 		<script>
@@ -91,6 +97,8 @@
 
 		<!-- Graphs -->
 		<script type="text/javascript" src="asserts/js/Chart.min.js"></script>
+
+        <script type="text/javascript" src="asserts/js/jquery-2.1.1.min.js" ></script>
 		<script>
 			var ctx = document.getElementById("myChart");
 			var myChart = new Chart(ctx, {
@@ -121,6 +129,37 @@
 			});
 		</script>
 
+                <script type="text/javascript">
+
+                    // $(document).ready(function () {
+                        $(".deleteBtn").click(function () {
+
+                            alert("???");
+                             var id = this.value;
+                            alert(id);
+                            $.ajax({
+                                url:"/deleteEmp",
+                                type:"post",
+                                data:{
+                                    "id":id
+                                },
+                                success:function (data) {
+                                    alert(data);
+                                    window.location.href="/emps"
+                                }
+                            })
+                        })
+                    // });
+
+                    /*$("#delBtn").on("click",function () {
+                        alert("???");
+                    })*/
+
+                    /*  function delEmp() {
+                          alert("???");
+                      }*/
+
+                </script>
 	</body>
 
 </html>

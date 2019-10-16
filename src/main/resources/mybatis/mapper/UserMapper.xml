@@ -21,20 +21,20 @@
         where id = #{id}
     </select>
 
-    <!--<insert id="addEmp" parameterType="com.hsj.entity.Employee" useGeneratedKeys="true" keyProperty="id">
+    <insert id="addEmp" parameterType="com.hsj.entity.Employee" useGeneratedKeys="true" keyProperty="id">
 
         insert into employee(name,gender,email,birth)
                     values(#{name},#{gender},#{email},#{birth})
-    </insert>-->
+    </insert>
 
-    <insert id="addEmp" parameterType="com.hsj.entity.Employee">
+    <!--<insert id="addEmp" parameterType="com.hsj.entity.Employee">
 
         <selectKey keyProperty="id" resultType="int" order="BEFORE">
             select emp_seq.nextval from dual
         </selectKey>
         insert into employee(id,name,gender,email,birth)
                     values(#{id},#{name},#{gender},#{email},#{birth})
-    </insert>
+    </insert>-->
 
     <update id="updateEmp" parameterType="com.hsj.entity.Employee">
 

@@ -12,5 +12,5 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   mvc:
     date-format: yyyy-MM-dd
-mybatis:
-  mapper-locations: classpath:mybatis/mapper/*.xml
+#mybatis:
+#  mapper-locations: classpath:mybatis/mapper/*.xml

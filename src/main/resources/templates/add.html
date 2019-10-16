@@ -8,6 +8,8 @@
 
     <!-- Custom styles for this template -->
     <link href="asserts/css/dashboard.css"  rel="stylesheet">
+    <script type="text/javascript" src="asserts/js/jquery-3.2.1.slim.min.js" ></script>
+    <script type="text/javascript" src="asserts/js/jquery-2.1.1.min.js" ></script>
     <style type="text/css">
         /* Chart.js */
 
@@ -34,16 +36,38 @@
             animation: chartjs-render-animation 0.001s;
         }
     </style>
+    <script type="text/javascript">
+        function addEmp() {
+           var name = $("#name").val();
+            var gender = $("#form input[type='radio']:checked").val();
+           var email = $("#email").val();
+           var birth = $("#birth").val();
+
+            $.ajax({
+                url:"/addEmp",
+                type:"POST",
+                data:{
+                    "name":name,
+                    "gender":gender,
+                    "email":email,
+                    "birth":birth
+                },
+                success:function (data) {
+                    window.location.href="/emps"
+                }
+            });
+        }
+    </script>
 </head>
 <body>
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
     <!--需要区分是员工修改还是添加；-->
-    <form action="/addEmp" method="post">
+    <form  method="post" id="form">
 
         <div class="form-group">
             <label>name</label>
-            <input name="name" type="text" class="form-control" placeholder="zhangsan">
+            <input name="name" id="name" type="text" class="form-control" placeholder="zhangsan">
         </div>
         <div class="form-group">
             <label>Gender</label><br/>
@@ -58,22 +82,22 @@
         </div>
         <div class="form-group">
             <label>email</label>
-            <input name="email" type="text" class="form-control" placeholder="xx@xx.com">
+            <input name="email" id="email" type="text" class="form-control" placeholder="xx@xx.com">
         </div>
         <div class="form-group">
             <label>Birth</label>
-            <input name="birth" type="text" class="form-control" placeholder="yyyy-MM-dd">
+            <input name="birth" id="birth" type="text" class="form-control" placeholder="yyyy-MM-dd">
         </div>
-        <button type="submit" class="btn btn-primary">添加</button>
+        <button  id="submit" type="button" class="btn btn-primary" onclick="addEmp()">添加</button>
     </form>
 </main>
 
-<script type="text/javascript" src="asserts/js/jquery-3.2.1.slim.min.js" th:src="@{/webjars/jquery/3.3.1/jquery.js}"></script>
-<script type="text/javascript" src="asserts/js/popper.min.js" th:src="@{/webjars/popper.js/1.11.1/dist/popper.js}"></script>
-<script type="text/javascript" src="asserts/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/4.0.0/js/bootstrap.js}"></script>
+
+<script type="text/javascript" src="asserts/js/popper.min.js" ></script>
+<script type="text/javascript" src="asserts/js/bootstrap.min.js" ></script>
 
 <!-- Icons -->
-<script type="text/javascript" src="asserts/js/feather.min.js" th:src="@{/asserts/js/feather.min.js}"></script>
+<script type="text/javascript" src="asserts/js/feather.min.js" ></script>
 <script>
     feather.replace()
 </script>

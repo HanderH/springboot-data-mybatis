@@ -16,5 +16,9 @@
 #  mapper-locations: classpath:mybatis/mapper/*.xml
 spring:
   profiles:
-#      active: mysql
-    active: oracle
+    active: mysql
+#    active: oracle
+logging:
+  level:
+    com.hsj: debug
+    root: info

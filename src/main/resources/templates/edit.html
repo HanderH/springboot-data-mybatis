@@ -34,17 +34,45 @@
             animation: chartjs-render-animation 0.001s;
         }
     </style>
+    <script type="text/javascript" src="asserts/js/jquery-3.2.1.slim.min.js" ></script>
+    <script type="text/javascript" src="asserts/js/jquery-2.1.1.min.js" ></script>
+    <script type="text/javascript">
+
+        function editEmp() {
+            var id = $("#id").val();
+            var name = $("#name").val();
+            var gender = $("#form input[type=radio]:checked").val();
+            var email = $("#email").val();
+            var birth = $("#birth").val();
+
+            $.ajax({
+                url:"/updateEmp",
+                type:"POST",
+                data:{
+                    "id":id,
+                    "name":name,
+                    "gender":gender,
+                    "email":email,
+                    "birth":birth
+                },
+                success:function (data) {
+                    alert(data);
+                    window.location.href="/emps"
+                }
+            })
+        }
+    </script>
 </head>
 <body>
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
     <!--需要区分是员工修改还是添加；-->
-    <form action="/updateEmp" method="post">
+    <form action="" method="post" id="form">
 
-        <input name="id" type="hidden" th:value="${emp.id}">
+        <input  id="id" name="id" type="hidden" th:value="${emp.id}">
         <div class="form-group">
             <label>name</label>
-            <input name="name" type="text" class="form-control" placeholder="zhangsan" th:value="${emp.name}">
+            <input name="name" id="name" type="text" class="form-control" placeholder="zhangsan" th:value="${emp.name}">
         </div>
         <div class="form-group">
             <label>Gender</label><br/>
@@ -59,22 +87,22 @@
         </div>
         <div class="form-group">
             <label>email</label>
-            <input name="email" type="text" class="form-control" placeholder="xx@xx.com" th:value="${emp.email}">
+            <input name="email" type="text" id="email" class="form-control" placeholder="xx@xx.com" th:value="${emp.email}">
         </div>
         <div class="form-group">
             <label>Birth</label>
-            <input name="birth" type="text" class="form-control" placeholder="yyyy-MM-dd" th:value="${#dates.format(emp.birth,'yyyy-MM-dd')}">
+            <input name="birth" type="text" id="birth" class="form-control" placeholder="yyyy-MM-dd" th:value="${#dates.format(emp.birth,'yyyy-MM-dd')}">
         </div>
-        <button type="submit" class="btn btn-primary">修改</button>
+        <button type="button" onclick="editEmp()" class="btn btn-primary">修改</button>
     </form>
 </main>
 
-<script type="text/javascript" src="asserts/js/jquery-3.2.1.slim.min.js" th:src="@{/webjars/jquery/3.3.1/jquery.js}"></script>
-<script type="text/javascript" src="asserts/js/popper.min.js" th:src="@{/webjars/popper.js/1.11.1/dist/popper.js}"></script>
-<script type="text/javascript" src="asserts/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/4.0.0/js/bootstrap.js}"></script>
+
+<script type="text/javascript" src="asserts/js/popper.min.js" ></script>
+<script type="text/javascript" src="asserts/js/bootstrap.min.js" ></script>
 
 <!-- Icons -->
-<script type="text/javascript" src="asserts/js/feather.min.js" th:src="@{/asserts/js/feather.min.js}"></script>
+<script type="text/javascript" src="asserts/js/feather.min.js" ></script>
 <script>
     feather.replace()
 </script>
