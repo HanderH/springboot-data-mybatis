@@ -2,8 +2,8 @@ server:
   port: 8888
 spring:
   datasource:
-    username: product_cfg_app
-    password: productCfgApp#123
+    username: hsj
+    password: 123#123
     url: jdbc:oracle:thin:url:port:database
     driver-class-name: oracle.jdbc.driver.OracleDriver
   mvc:
